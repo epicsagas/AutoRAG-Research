@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from pydantic import Field, PrivateAttr
 
 if TYPE_CHECKING:
-    from colpali_engine.utils.processing_utils import BaseVisualRetrieverProcessor
+    from colpali_engine.utils.processing_utils import BaseVisualRetrieverProcessor  # ty: ignore[unresolved-import]
     from transformers import PreTrainedModel
 
 from autorag_research.embeddings.base import (
@@ -36,7 +36,7 @@ def _load_col_model_classes(model_type: str) -> tuple[PreTrainedModel, BaseVisua
     model_class_name, processor_class_name = COL_MODEL_REGISTRY[model_type]
 
     try:
-        import colpali_engine.models as models_module
+        import colpali_engine.models as models_module  # ty: ignore[unresolved-import]
 
         model_class = getattr(models_module, model_class_name)
         processor_class = getattr(models_module, processor_class_name)
@@ -99,7 +99,7 @@ class ColPaliEmbeddings(MultiVectorMultiModalEmbedding):
 
         resolved_dtype = getattr(torch, self.torch_dtype) if isinstance(self.torch_dtype, str) else self.torch_dtype
 
-        self._processor = processor_class.from_pretrained(self.model_name)  # ty: ignore
+        self._processor = processor_class.from_pretrained(self.model_name)
         self._model = model_class.from_pretrained(
             self.model_name,
             dtype=resolved_dtype,

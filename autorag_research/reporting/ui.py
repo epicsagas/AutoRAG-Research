@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-import gradio as gr
+import gradio as gr  # ty: ignore[unresolved-import]
 import pandas as pd
 
 from autorag_research.reporting.service import ReportingService

@@ -2,7 +2,7 @@ import logging
 from types import TracebackType
 from typing import Literal
 
-import duckdb
+import duckdb  # ty: ignore[unresolved-import]
 import pandas as pd
 
 from autorag_research.orm.connection import DBConnection
